@@ -49,6 +49,11 @@ async function run() {
       res.send(result);
     });
 
+    // app.get("/spotDetails/:id", async (req, res) => {
+    //   const id = req.params.id;
+    //   const
+    // });
+
     app.delete("/touristspots/id/:id", async (req, res) => {
       const id = req.params.id;
       const filter = { _id: new ObjectId(id) };
@@ -57,28 +62,29 @@ async function run() {
       res.send(result);
     });
 
-    // app.put("/touristspots/:id", async (req, res) => {
-    //   const id = req.params.id;
-    //   const query = { _id: new ObjectId(id) };
-    //   const newSpot = req.body;
-    //   const updatedSpot = {
-    //     $set: {
-    //       country: newSpot.country,
-    //       spotName: newSpot.spotName,
-    //       totalVisitors: newSpot.totalVisitors,
-    //       location: newSpot.location,
-    //       description: newSpot.description,
-    //       cost: newSpot.cost,
-    //       seasonality: newSpot.seasonality,
-    //       travelTime: newSpot.travelTime,
-    //       name: newSpot.name,
-    //       email: newSpot.email,
-    //       photo: newSpot.photo,
-    //     },
-    //   };
-    //   const result = await spotsCollection.updateOne(query, updatedSpot);
-    //   res.send(result);
-    // });
+    app.put("/touristspots/id/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const newSpot = req.body;
+      const updatedSpot = {
+        $set: {
+          country: newSpot.country,
+          spotName: newSpot.spotName,
+          totalVisitors: newSpot.totalVisitors,
+          location: newSpot.location,
+          description: newSpot.description,
+          cost: newSpot.cost,
+          seasonality: newSpot.seasonality,
+          travelTime: newSpot.travelTime,
+          name: newSpot.name,
+          email: newSpot.email,
+          photo: newSpot.photo,
+        },
+      };
+      const result = await spotsCollection.updateOne(query, updatedSpot);
+      console.log(result);
+      res.send(result);
+    });
 
     app.get("/touristspots", async (req, res) => {
       const cursor = spotsCollection.find();
