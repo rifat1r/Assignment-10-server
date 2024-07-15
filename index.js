@@ -26,6 +26,9 @@ async function run() {
     await client.connect();
 
     const spotsCollection = client.db("newSpots").collection("spotsCollection");
+    const activityCollection = client
+      .db("newSpots")
+      .collection("activityCollection");
 
     app.post("/touristspots", async (req, res) => {
       const newSpots = req.body;
@@ -48,11 +51,6 @@ async function run() {
       const result = await cursor.toArray();
       res.send(result);
     });
-
-    // app.get("/spotDetails/:id", async (req, res) => {
-    //   const id = req.params.id;
-    //   const
-    // });
 
     app.delete("/touristspots/id/:id", async (req, res) => {
       const id = req.params.id;
@@ -91,6 +89,9 @@ async function run() {
       const result = await cursor.toArray();
       res.send(result);
     });
+
+    //activity related stuff
+    app.post("/");
 
     await client.db("admin").command({ ping: 1 });
     console.log(
