@@ -52,6 +52,12 @@ async function run() {
       res.send(result);
     });
 
+    app.get("/touristspots/cost", async (req, res) => {
+      const cursor = spotsCollection.find().sort({ cost: -1 });
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
     app.delete("/touristspots/id/:id", async (req, res) => {
       const id = req.params.id;
       const filter = { _id: new ObjectId(id) };
@@ -90,7 +96,7 @@ async function run() {
       res.send(result);
     });
 
-    //activity related stuff
+    //activity related stuff=
     app.post("/activity", async (req, res) => {
       const activity = req.body;
       const result = await activityCollection.insertOne(activity);
