@@ -58,6 +58,12 @@ async function run() {
       res.send(result);
     });
 
+    app.get("/touristspots/costasc", async (req, res) => {
+      const cursor = spotsCollection.find().sort({ cost: 1 }); // Ascending order
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
     app.delete("/touristspots/id/:id", async (req, res) => {
       const id = req.params.id;
       const filter = { _id: new ObjectId(id) };
