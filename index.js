@@ -94,7 +94,7 @@ async function run() {
     app.post("/activity", async (req, res) => {
       const activity = req.body;
       const result = await activityCollection.insertOne(activity);
-      res.send();
+      res.send(result);
     });
 
     await client.db("admin").command({ ping: 1 });
